@@ -1,5 +1,4 @@
 #include "HelloWorldScene.h"
-
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -38,7 +37,7 @@ bool HelloWorld::init()
 	//添加摇杆
 	rocker = HRocker::createHRocker("Direction_bt.png","Direction_bc.png",ccp(110,60));//其中第一张图片为摇杆的按钮，第二张为背景
 	this->addChild(rocker,2);
-	rocker->startRocker(true);
+	rocker->startRocker(false);//true表示只能响应这层的触摸
 
 
 	//添加赵云精灵
@@ -46,8 +45,13 @@ bool HelloWorld::init()
 	hero->InitHeroSprite("zhoayun.png");
 	hero->setPosition(ccp(200,200));
 	this->addChild(hero,1);
-	//hero->SetAnimation("run_animation.plist","run_animation.png",8,true);//8表示plist中的图片数目,false表示脸朝右
 
+    CCLOG("add attack button");
+	//添加攻击按钮
+    btn=MyControlButton::create();
+    btn->CreateButton("bt.png");
+    btn->setPosition(ccp(visibleSize.width-50,50));
+    this->addChild(btn,2);
 
 	//启动updata事件
 	this->scheduleUpdate();
@@ -113,5 +117,7 @@ void HelloWorld::update(float delta)
 		break;
 
     }
+	if(btn->isTouch)
+		hero->AttackAnimation("attack1_animation.plist","attack1_animation.png","attack_",6,rocker->rocketRun);
 
 }

@@ -120,6 +120,7 @@ set(GAME_SRC
   Classes/HelloWorldScene.cpp
   Classes/HRocker.cpp
   Classes/Hero.cpp
+  Classes/ControlButton.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -128,6 +129,7 @@ set(GAME_HEADERS
   Classes/HelloWorldScene.h
   Classes/HRocker.h
   Classes/Hero.h
+  Classes/ControlButton.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

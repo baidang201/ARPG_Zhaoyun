@@ -18,13 +18,21 @@ USING_NS_CC_EXT;
      //GetHeroPoint
      const Sprite* GetHeroSprite() const;
 
+	 //攻击动画
+	 void AttackAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,bool run_directon);
+	 //攻击动画结束
+	 void AttackEnd();
 	//判断是否在跑动画
 	 bool IsRunning;
+	 //判断是否在攻击动画
+	 bool IsAttack;
 	 //英雄运动的方向
 	 bool HeroDirecton;
 	 CREATE_FUNC(Hero);
  private:
 	 Sprite* m_HeroSprite;//精灵
 	 char *Hero_name;//用来保存初始状态的精灵图片名称
+	 CCSpriteFrameCache *m_frameCache;
+     Vector<CCSpriteFrame*> frameArray;
  };
 #endif // __HERO_H__

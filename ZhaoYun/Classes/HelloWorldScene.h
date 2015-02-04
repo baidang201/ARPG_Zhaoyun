@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "HRocker.h"
 #include "Hero.h"
+#include "ControlButton.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -27,6 +28,8 @@ private:
 
     Size visibleSize;
     Vec2 origin;
+    MyControlButton* btn;//按钮控件变量
+    
 };
 
 #endif // __HELLOWORLD_SCENE_H__
