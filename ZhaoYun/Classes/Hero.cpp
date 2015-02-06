@@ -122,3 +122,11 @@ const Sprite* Hero::GetHeroSprite() const
 	  this->addChild(m_HeroSprite);
 	   IsAttack=false;
   }
+  bool Hero::JudgePositona (CCSize visibleSize)//judge the hero is in middle?
+  {
+      CCLog("JudgePositona %f != %f",  this->getPosition().x, visibleSize.width/2);
+	  if(this->getPositionX()!=visibleSize.width/2)//精灵到达左边
+		  return false;
+	  else
+		  return true;//到达中间位置
+  }

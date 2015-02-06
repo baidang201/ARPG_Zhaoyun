@@ -29,10 +29,11 @@ bool HelloWorld::init()
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
 
-    //修改背景图片
-    Sprite* pSprite = Sprite::create("background_1.jpg");
-    pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    this->addChild(pSprite, 0);//这里的0表示放在最底层
+   // 修改背景图片
+	//更改为自己定义的地图
+    mymap=MyMap::create();
+	mymap->InitMap("12.png",visibleSize);
+	this->addChild(mymap,0);//这里的0表示放在最底层
     
 	//添加摇杆
 	rocker = HRocker::createHRocker("Direction_bt.png","Direction_bc.png",ccp(110,60));//其中第一张图片为摇杆的按钮，第二张为背景
@@ -46,7 +47,6 @@ bool HelloWorld::init()
 	hero->setPosition(ccp(200,200));
 	this->addChild(hero,1);
 
-    CCLOG("add attack button");
 	//添加攻击按钮
     btn=MyControlButton::create();
     btn->CreateButton("bt.png");
@@ -75,20 +75,34 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::update(float delta)
 {
-    int newX = 0;
-    int newY = 0;
+
 	//判断是否按下摇杆及其类型
 	switch(rocker->rocketDirection)
 	{
 	case 1:
+        CCLog("move %f   %f", hero->getPosition().x, hero->getPosition().y);
         hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
-        if(hero->getPosition().x+2 + hero->GetHeroSprite()->getContentSize().width/2 > visibleSize.width)
+        if(hero->getPosition().x+2 + hero->GetHeroSprite()->getContentSize().width/2 < visibleSize.width)
         {
-            break;
-        }
-        hero->setPosition(ccp(hero->getPosition().x+2,hero->getPosition().y)); //向右走
+            if( mymap->JudgeMapNotEnd(visibleSize, true))
+            {
+                if(
+                        hero->JudgePositona(visibleSize) //hero  in middle
+                   )
+                {
+                    //下面是移动地图
+                    mymap->MoveMap(hero,visibleSize, true);
+                    CCLog("move map");
+                    break;
+                }
+            }
+            //精灵没到达窗口中间位置或者地图已经移动到边缘了，精灵才可以移动，否则只播放动画
+            hero->setPosition(ccp(hero->getPosition().x+2,hero->getPosition().y)); //向右走
+            CCLog("move right");
+        }        
 		break;
 	case  2:
+        CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
         hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
         if(hero->getPosition().y+2 + hero->GetHeroSprite()->getContentSize().height/2 > visibleSize.height)
         {
@@ -97,19 +111,34 @@ void HelloWorld::update(float delta)
         hero->setPosition(ccp(hero->getPosition().x, hero->getPosition().y+2));   //向上走
 		break;
 	case 3:
+        CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
         hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
-        if(hero->getPosition().x-2 - hero->GetHeroSprite()->getContentSize().width/2 < 0)
+        if(hero->getPosition().x-2 - hero->GetHeroSprite()->getContentSize().width/2 > 0)
         {
-            break;
-        }
-        hero->setPosition(ccp(hero->getPosition().x-2,hero->getPosition().y));   //向左走
+            if( mymap->JudgeMapNotEnd(visibleSize, false))
+            {
+                if(
+                        hero->JudgePositona(visibleSize) //hero  in middle
+                   )
+                {
+                    //下面是移动地图
+                    mymap->MoveMap(hero,visibleSize, false);
+                    CCLog("move map");
+                    break;
+                }
+            }
+
+            hero->setPosition(ccp(hero->getPosition().x-2,hero->getPosition().y));   //向左走
+            CCLog("move left");
+        }        
 		break;
 	case 4:
+        CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
+        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
         if(hero->getPosition().y-2 - hero->GetHeroSprite()->getContentSize().height/2 < 0)
         {
             break;
         }
-        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
         hero->setPosition(ccp(hero->getPosition().x,hero->getPosition().y-2));   //向下走
 		break;
 	default:

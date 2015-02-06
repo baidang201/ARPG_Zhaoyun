@@ -22,6 +22,8 @@ USING_NS_CC_EXT;
 	 void AttackAnimation(const char *name_plist,const char *name_png,const char *name_each,const unsigned int num,bool run_directon);
 	 //攻击动画结束
 	 void AttackEnd();
+	 //判断英雄是否运动到了窗口的中间位置,visibleSize为当前窗口的大小  
+	 bool JudgePositona(CCSize visibleSize);  
 	//判断是否在跑动画
 	 bool IsRunning;
 	 //判断是否在攻击动画

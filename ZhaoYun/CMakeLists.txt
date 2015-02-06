@@ -121,6 +121,7 @@ set(GAME_SRC
   Classes/HRocker.cpp
   Classes/Hero.cpp
   Classes/ControlButton.cpp
+  Classes/Map.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -130,6 +131,7 @@ set(GAME_HEADERS
   Classes/HRocker.h
   Classes/Hero.h
   Classes/ControlButton.h
+  Classes/Map.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
