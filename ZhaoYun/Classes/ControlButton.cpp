@@ -10,8 +10,7 @@ void MyControlButton::CreateButton(const char* name_png,const char* button_title
 {
 	//得到按钮图片的大小 
     Scale9Sprite* btn = Scale9Sprite::create(name_png);
-    CCLOG("%f",btn->getContentSize().width);
-    CCLOG("%f",btn->getContentSize().height);
+
     int  png_height=static_cast<int>(btn->getContentSize().height);
     int  png_width=static_cast<int>( btn->getContentSize().width);
 //  btn->autorelease();

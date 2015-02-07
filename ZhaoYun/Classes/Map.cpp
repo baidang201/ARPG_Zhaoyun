@@ -35,11 +35,10 @@ void MyMap::MoveMap(CCNode *hero,CCSize visibleSize, bool directRight)//
 }
 
 bool MyMap::JudgeMapNotEnd(CCSize visibleSize, bool directRight)
-{
-    CCLog("JudgeMapNotEnd %f  %f", this->getPositionX(), -(m_map->getContentSize().width-visibleSize.width));
-    if(this->getPositionX() == -(m_map->getContentSize().width-visibleSize.width)  && directRight)//地图已经移动到达边缘
+{   
+    if(this->getPositionX() == -(m_map->getContentSize().width-visibleSize.width)  && directRight)//move right 地图已经移动到达边缘
         return false;
-    else if(this->getPositionX() == 0 && !directRight)//地图已经移动到达边缘
+    else if(this->getPositionX() == 0 && !directRight)//move left 地图已经移动到达边缘
         return false;
     else
         return true;

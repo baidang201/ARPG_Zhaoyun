@@ -6,6 +6,7 @@
 #include "Hero.h"
 #include "ControlButton.h"
 #include "Map.h"
+#include "ProgressView.h" 
 class HelloWorld : public cocos2d::CCLayer
 {
 public:
@@ -30,6 +31,7 @@ private:
     Vec2 origin;
     MyControlButton* btn;//按钮控件变量
     MyMap*     mymap;//地图
+	 ProgressView *m_pProgressView;  //血条
 };
 
 #endif // __HELLOWORLD_SCENE_H__

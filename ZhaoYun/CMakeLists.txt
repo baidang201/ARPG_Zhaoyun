@@ -122,6 +122,7 @@ set(GAME_SRC
   Classes/Hero.cpp
   Classes/ControlButton.cpp
   Classes/Map.cpp
+  Classes/ProgressView.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -132,6 +133,7 @@ set(GAME_HEADERS
   Classes/Hero.h
   Classes/ControlButton.h
   Classes/Map.h
+  Classes/ProgressView.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 

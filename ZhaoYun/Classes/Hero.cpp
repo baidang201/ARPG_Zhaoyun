@@ -23,7 +23,7 @@ Hero::~Hero(void)
 
  //原地奔跑动画
  void Hero::SetAnimationAdv(const char *name_plist,const char *name_png, const char * actNameInNamePng, unsigned int startIndex, unsigned int num,bool run_directon)
- {
+ {     
      if(HeroDirecton!=run_directon)
      {
          HeroDirecton=run_directon;
@@ -59,6 +59,7 @@ Hero::~Hero(void)
 
      m_HeroSprite->runAction(act);
      IsRunning=true;
+     IsAttack = false;
 
  }
 
@@ -84,6 +85,8 @@ const Sprite* Hero::GetHeroSprite() const
   {
 	  if(IsAttack)
 		  return;
+
+      CCLog("AttackAnimation  goAttack");
 	  //将图片加载到精灵帧缓存池
 	 m_frameCache=CCSpriteFrameCache::sharedSpriteFrameCache();
      m_frameCache->addSpriteFramesWithFile(name_plist,name_png);
@@ -121,11 +124,11 @@ const Sprite* Hero::GetHeroSprite() const
 	  m_HeroSprite->setFlipX(HeroDirecton);
 	  this->addChild(m_HeroSprite);
 	   IsAttack=false;
+       CCLog("AttackEnd()");
   }
-  bool Hero::JudgePositona (CCSize visibleSize)//judge the hero is in middle?
-  {
-      CCLog("JudgePositona %f != %f",  this->getPosition().x, visibleSize.width/2);
-	  if(this->getPositionX()!=visibleSize.width/2)//精灵到达左边
+  bool Hero::JudgePositona (CCSize visibleSize)//judge the hero is in the middle?
+  {     
+      if(this->getPositionX()!=visibleSize.width/2)//
 		  return false;
 	  else
 		  return true;//到达中间位置
