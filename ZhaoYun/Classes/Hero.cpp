@@ -104,7 +104,7 @@ const Sprite* Hero::GetHeroSprite() const
 
 	  }
 	  animation->setLoops(1);//表示循环播放次
-	  animation->setDelayPerUnit(0.1f);//每两张图片的时间隔，图片数目越少，间隔最小就越小
+      animation->setDelayPerUnit(0.05f);//每两张图片的时间隔，图片数目越少，间隔最小就越小
 
 	  //将动画包装成一个动作
 	  CCAnimate* act=CCAnimate::create(animation);

@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "HRocker.h"
 #include "Hero.h"
+#include "Monster.h"
 #include "ControlButton.h"
 #include "Map.h"
 #include "ProgressView.h" 
@@ -32,6 +33,7 @@ private:
     MyControlButton* btn;//按钮控件变量
     MyMap*     mymap;//地图
 	 ProgressView *m_pProgressView;  //血条
+	 Monster *monster1;//怪物种类1
 };
 
 #endif // __HELLOWORLD_SCENE_H__

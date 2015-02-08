@@ -43,7 +43,7 @@ bool HelloWorld::init()
 
 	//添加赵云精灵
 	hero=Hero::create();
-	hero->InitHeroSprite("zhoayun.png");
+    hero->InitHeroSprite("hero.png");
 	hero->setPosition(ccp(200,200));
 	this->addChild(hero,1);
 
@@ -71,6 +71,13 @@ bool HelloWorld::init()
 	this->addChild(xuekuang,2);
 	this->addChild(m_pProgressView, 2);  
 
+	//添加怪物
+	monster1=Monster::create();
+	//monster1->InitMonsterSprite("monster.png");
+	monster1->InitMonsterSprite("monster.png","xue_back.png","xue_fore.png");
+	monster1->setPosition(ccp(visibleSize.width-150,visibleSize.height/2));
+	this->addChild(monster1,1);
+	
     auto listenerKey = EventListenerKeyboard::create();//创建一个触摸监听
     listenerKey->onKeyPressed = [this](EventKeyboard::KeyCode code, Event* event)
     {
@@ -83,13 +90,11 @@ bool HelloWorld::init()
         default:
             break;
         }
-        log("press X key, touch true");
     };
 
     listenerKey->onKeyReleased = [this](EventKeyboard::KeyCode code, Event* event)
     {
         btn->isTouch = false;
-        log("released X key, touch false");
     };
 
     //将触摸监听添加到eventDispacher中去
@@ -124,7 +129,7 @@ void HelloWorld::update(float delta)
 	{
 	case 1:
         //CCLog("move %f   %f", hero->getPosition().x, hero->getPosition().y);
-        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
+        hero->SetAnimationAdv("hero_run.plist","hero_run.png", "hero_run", 1, 8, rocker->rocketRun);
         if(hero->getPosition().x+2 + hero->GetHeroSprite()->getContentSize().width/2 < visibleSize.width)
         {
             if( mymap->JudgeMapNotEnd(visibleSize, true))
@@ -145,7 +150,7 @@ void HelloWorld::update(float delta)
 		break;
 	case  2:
         //CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
-        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
+        hero->SetAnimationAdv("hero_run.plist","hero_run.png", "hero_run", 1, 8, rocker->rocketRun);
         if(hero->getPosition().y+2 + hero->GetHeroSprite()->getContentSize().height/2 > visibleSize.height)
         {
             break;
@@ -154,7 +159,7 @@ void HelloWorld::update(float delta)
 		break;
 	case 3:
         //CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
-        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
+        hero->SetAnimationAdv("hero_run.plist","hero_run.png", "hero_run", 1, 8, rocker->rocketRun);
         if(hero->getPosition().x-2 - hero->GetHeroSprite()->getContentSize().width/2 > 0)
         {
             if( mymap->JudgeMapNotEnd(visibleSize, false))
@@ -175,7 +180,7 @@ void HelloWorld::update(float delta)
 		break;
 	case 4:
         //CCLog("move  %f   %f", hero->getPosition().x, hero->getPosition().y);
-        hero->SetAnimationAdv("run_animation.plist","run_animation.png", "run_", 2, 8, rocker->rocketRun);
+        hero->SetAnimationAdv("hero_run.plist","hero_run.png", "hero_run", 1, 8, rocker->rocketRun);
         if(hero->getPosition().y-2 - hero->GetHeroSprite()->getContentSize().height/2 < 0)
         {
             break;
@@ -191,7 +196,7 @@ void HelloWorld::update(float delta)
 	{
 		if(hero->IsAttack)//英雄没在攻击
 			return;
-		hero->AttackAnimation("attack1_animation.plist","attack1_animation.png","attack_",6,rocker->rocketRun);
+        hero->AttackAnimation("hero_attack.plist","hero_attack.png","hero_attack",20,rocker->rocketRun);
 		m_pProgressView->setCurrentProgress(m_pProgressView->getCurrentProgress()-10); //更改血量
 	}
 }
