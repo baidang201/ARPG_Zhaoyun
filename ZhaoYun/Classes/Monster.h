@@ -30,11 +30,29 @@ public:
 	bool IsAttack;
 	//英雄运动的方向
 	bool MonsterDirecton;
+
+	//在可视范围内，怪物跟随英雄运动
+	void FollowRun(CCNode* m_hero,CCNode* m_map);
+	//判断是否攻击
+	void JudegeAttack();
+	//怪物巡逻路线
+	void MonsterSeeRun();
+
+	//怪物启动监听英雄
+	void StartListen(CCNode* m_hero,CCNode* m_map);
+	//监听函数,每隔3秒检测下，计算英雄与怪物的距离
+	void updateMonster(float delta);
+	//更新函数，如果英雄在可视范围内，不断触发
+	void update(float delta);
+
 	CREATE_FUNC(Monster);
 private:
 	CCSprite* m_MonsterSprite;//怪物精灵
 	char *Monster_name;//用来保存初始状态的精灵图片名称
 	ProgressView*  Monster_xue;//怪物血条
+	CCNode* my_hero;//当前英雄
+	CCNode* my_map;//当前地图
+	float   dis;//当前怪物和英雄的距离
 	
 };
 #endif // __HERO_H__

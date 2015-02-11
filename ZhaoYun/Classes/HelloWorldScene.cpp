@@ -76,7 +76,9 @@ bool HelloWorld::init()
 	//monster1->InitMonsterSprite("monster.png");
 	monster1->InitMonsterSprite("monster.png","xue_back.png","xue_fore.png");
 	monster1->setPosition(ccp(visibleSize.width-150,visibleSize.height/2));
-	this->addChild(monster1,1);
+	//this->addChild(monster1,1);
+	mymap->addChild(monster1);//将怪物添加到地图中，这样怪物才能随地图移动
+	monster1->StartListen(hero,mymap);
 	
     auto listenerKey = EventListenerKeyboard::create();//创建一个触摸监听
     listenerKey->onKeyPressed = [this](EventKeyboard::KeyCode code, Event* event)
